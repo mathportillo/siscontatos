@@ -1,0 +1,25 @@
+To install SisContatos, follow these steps:
+
+1. Copy this folder into your web public directory
+2. Give to apache daemon user rights to uploads folder
+3. Change file system/application/config/config.php
+    Set base_url to system URL with trail slash
+4. Change file system/application/config/database.php
+    Configure database parameters, with a user with CREATE DATABASE permissions
+5. Go to web browser and call <system_url>/index.php/installer
+6. Enjoy! (user = admin, password = admin)
+
+
+#Portuguese version.
+
+Para instalar o SisContatos, siga os seguintes passos
+
+1. Copie esta pasta em seu diretório público da web
+2. Dê ao usuário do apache permissões de escrita na pasta uploads
+3. Altere o arquivo system/application/config/config.php
+    Configure base_url para a URL do sistema, com barra (/) no final
+4. Altere o arquivo system/application/config/database.php
+    Configure os parâmetros de banco de dados, com um usuário com permissões de CREATE DATABASE
+5. Vá para o navegador web e abra <system_url>/index.php/installer
+6. (usuário = admin, senha = admin)
+
