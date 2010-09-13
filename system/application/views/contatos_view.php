@@ -105,11 +105,11 @@
 		<div class="faixa">
 			<div id="div_importar">
 				<? if (Usuario::atual()->Permissoes[0]->pode_editar) { ?>
-					<?= anchor('importar', 'Importar', 'class="itembutton"'); ?>
+					<?= anchor('contatos/importar', 'Importar', 'class="itembutton"'); ?>
 				<? } ?>
 			</div>
 			<div  id="div_exportar">
-				<?= anchor('exportar', 'Exportar', 'class="itembutton"'); ?>
+				<?= anchor('contatos/exportar', 'Exportar', 'class="itembutton"'); ?>
 			</div>
 		</div>
 	</div></div>

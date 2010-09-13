@@ -1,6 +1,6 @@
 <? $this->load->view('_template_open_view'); ?>
 
-<?= form_open('importar/enviar_arquivo', 'id="form_importar" enctype="multipart/form-data"') ?>
+<?= form_open('contatos/enviar_arquivo', 'id="form_importar" enctype="multipart/form-data"') ?>
 <table align="center" border="0" class="simplefont">
 	<tbody>
 		<tr>

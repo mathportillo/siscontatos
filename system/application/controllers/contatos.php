@@ -19,7 +19,7 @@
 			}
 			$this->load->library('form_validation');
 		}
-	
+		
 		// Função index - lista os contatos (com paginação e busca)
 		// TODO: Remover falha de SQL injection
 		public function index()
@@ -42,7 +42,7 @@
 			} else {
 				$pagina_atual = 1;
 			}
-	
+		
 			$result = Doctrine_Query::create()
 						->from('Contato')
 						->where('(nome LIKE \'%' . $busca . '%\') OR (entidade LIKE \'%' . $busca . '%\')')
@@ -50,7 +50,7 @@
 						->andWhere("agenda_id = " . $this->session->userdata('agenda'))
 						->orderby('nome')
 						->execute();
-	
+		
 			$total_rows = count($result);
 			
 			$result = Doctrine_Query::create()
@@ -74,7 +74,7 @@
 			$data['busca'] = $busca;
 			$this->load->view('contatos_view',$data);
 		}
-	
+		
 		// Função novo - Carrega o form de Contato para um novo contato
 		public function novo()
 		{
@@ -84,7 +84,7 @@
 			$data['obj_contato'] = null;
 			$this->_carrega_editar($data);
 		}
-	
+		
 		// Função editar - Carrega o form de Contato para um contato existente
 		public function editar()
 		{
@@ -94,7 +94,7 @@
 			$data['obj_contato'] = Doctrine::getTable('Contato')->find($this->uri->segment(3));
 			$this->_carrega_editar($data);
 		}
-
+		
 		// Função excluir - Exclui um contato	
 		public function excluir()
 		{
@@ -107,7 +107,7 @@
 			}
 			redirect('contatos');
 		}
-	
+		
 		// Função auxiliar _carrega_editar - configura as variáveis de entrada da View
 		// para diferenciar os casos em que é um novo contato, um contato existente ou um formulário já preenchido
 		public function _carrega_editar($data)
@@ -231,11 +231,11 @@
 			$data['value'] = $value;
 			$this->load->view('contatos_editar_view',$data);
 		}
-	
+		
 		// Função salvar - Salva os dados que foram entrados no form de Contato
 		public function salvar()
 		{
-	
+		
 			if (!$this->_submit_validate()) {
 				if ($this->input->post('id') == '') {
 					$this->novo();
@@ -245,11 +245,11 @@
 					}
 					$data['obj_contato'] = Doctrine::getTable('Contato')->find($this->input->post('id'));
 					$this->_carrega_editar($data);
-	//				redirect('contatos/editar/' . $this->input->post('id'));
+		//				redirect('contatos/editar/' . $this->input->post('id'));
 				}
 				return;
 			}
-	
+		
 			if ($this->input->post('id') == '') {
 				$novo_contato = new Contato();
 			} else {
@@ -301,41 +301,157 @@
 			$novo_contato->observacao = $this->input->post('observacao');
 			$novo_contato->agenda_id = $this->session->userdata('agenda');
 			$novo_contato->save();
-	
+		
 			redirect('contatos');
 		}
-	
+		
 		// Função _submit_validate - valida o form de Contato
 		// TODO: form_validation telefones
-		private function _submit_validate() {
-	
+		private function _submit_validate()
+		{
 			$this->form_validation->set_rules('nome', 'Nome',
 				'required|max_length[255]');
-	
+		
 			$this->form_validation->set_rules('entidade', 'Entidade',
 				'required|max_length[255]');
 			
 			//$this->form_validation->set_rules('telefone1', 'Telefone1',
 			//	'numeric|max_length[12]');
-	
+		
 			//$this->form_validation->set_rules('telefone2', 'Telefone2',
 			//	'numeric|max_length[15]');
-	
+		
 			//$this->form_validation->set_rules('telefone3', 'Telefone3',
 			//	'numeric|max_length[15]');
-	
+		
 			//$this->form_validation->set_rules('celular1', 'Celular1',
 			//	'numeric|max_length[15]');
-	
+		
 			//$this->form_validation->set_rules('celular2', 'Celular2',
 			//	'numeric|max_length[15]');
-	
+		
 			//$this->form_validation->set_rules('fax', 'Fax',
 			//	'numeric|max_length[15]');
-	
+		
 			return $this->form_validation->run();
-	 
-	    }
-	}
+		}
+		
+		// Função Importar - Carrega o form de importação
+		function importar()
+		{
+			if (!Usuario::atual()->Permissoes[0]->pode_editar) {
+				die();
+			}
+			$data['obj_upload'] = null;
+			$this->load->view('importar_view',$data);
+		}
 
+		// Função enviar_arquivo - Processa a importação
+		function enviar_arquivo()
+		{
+			$config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'csv';
+			$this->load->library('upload',$config);
+			if (!$this->upload->do_upload('arquivo')) {
+				$data['obj_upload'] = $this->upload;
+				$this->load->view('importar_view',$data);
+			} else {
+				$this->_process_file();
+				$data['obj_upload'] = $this->upload;
+				redirect('contatos');
+			}
+		}
+		
+		// Função Auxiliar _process_file - processa o arquivo de entrada, criando contatos
+		function  _process_file()
+		{
+			$upload_info = $this->upload->data();		
+			$myFile = $upload_info['full_path'];
+			$fh = fopen($myFile, 'r');
+			$theData = fgets($fh);
+			$theData = fgets($fh);
+
+			while ($theData = fgets($fh)) {
+				$arr_data = explode(';', $theData);
+				$obj_contato = new Contato();
+				
+				$obj_contato->nome = $arr_data[0];
+				$obj_contato->entidade = $arr_data[1];
+				$obj_contato->cargo = $arr_data[2];
+				$obj_contato->telefone1 = $arr_data[3];
+				$obj_contato->telefone2 = $arr_data[4];
+				$obj_contato->telefone3 = $arr_data[5];
+				$obj_contato->celular1 = $arr_data[6];
+				$obj_contato->celular2 = $arr_data[7];
+				$obj_contato->fax = $arr_data[8];
+				$obj_contato->email1 = $arr_data[9];
+				$obj_contato->email2 = $arr_data[10];
+				$obj_contato->logradouro = $arr_data[11];
+				$obj_contato->numero = $arr_data[12];
+				$obj_contato->complemento = $arr_data[13];
+				$obj_contato->bairro = $arr_data[14];
+				$obj_contato->cep = $arr_data[15];
+				$obj_contato->cidade = $arr_data[16];
+				$obj_contato->estado = $arr_data[17];
+				$obj_contato->pais = $arr_data[18];
+				$obj_contato->observacao = substr($arr_data[19], 0, strlen($arr_data[19]) - 1);
+				$obj_contato->agenda_id = $this->session->userdata('agenda');
+				
+				$obj_contato->save();
+			}
+			fclose($fh);
+			unlink($myFile);
+		}
+		
+		// Função Exportar - Exporta os Contatos em CSV
+		function exportar()
+		{
+			if (!Usuario::atual()->Permissoes[0]->pode_editar) {
+				die();
+			}
+			header('Content-type: text/csv');
+			header("Content-Disposition: attachment; filename=contatos.csv");
+			header('Content-Transfer-Encoding: binary');
+			header('Expires: 0');
+			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+			header('Pragma: public');
+			//header('Content-Length: ' . filesize('cert/' . $certificado.'.pdf'));
+			echo "nome;entidade;cargo;telefone1;telefone2;telefone3;celular1;celular2;fax;email1;email2;logradouro;numero;complemento;bairro;cep;cidade;estado;pais;observacao\n\n";
+			$contatos = Doctrine_Query::create()
+									->from('Contato')
+									->where("agenda_id = " . $this->session->userdata('agenda'))
+									->orderby('nome')
+									->execute();
+			foreach ($contatos as $contato) {
+				$this->_safe_echo($contato->nome); echo ';';
+				$this->_safe_echo($contato->entidade); echo ';';
+				$this->_safe_echo($contato->cargo); echo ';';
+				$this->_safe_echo($contato->telefone1); echo ';';
+				$this->_safe_echo($contato->telefone2); echo ';';
+				$this->_safe_echo($contato->telefone3); echo ';';
+				$this->_safe_echo($contato->celular1); echo ';';
+				$this->_safe_echo($contato->celular2); echo ';';
+				$this->_safe_echo($contato->fax); echo ';';
+				$this->_safe_echo($contato->email1); echo ';';
+				$this->_safe_echo($contato->email2); echo ';';
+				$this->_safe_echo($contato->logradouro); echo ';';
+				$this->_safe_echo($contato->numero); echo ';';
+				$this->_safe_echo($contato->complemento); echo ';';
+				$this->_safe_echo($contato->bairro); echo ';';
+				$this->_safe_echo($contato->cep); echo ';';
+				$this->_safe_echo($contato->cidade); echo ';';
+				$this->_safe_echo($contato->estado); echo ';';
+				$this->_safe_echo($contato->pais); echo ';';
+				$this->_safe_echo($contato->observacao); echo "\n";
+			}
+		}
+		
+		// Função Auxiliar _safe_echo - não imprime ; nem \n
+		function _safe_echo($str)
+		{
+			$str = str_replace(';', ',', $str);
+			$str = str_replace("\n", ' ', $str);
+			echo $str;
+		}
+	}
 ?>
