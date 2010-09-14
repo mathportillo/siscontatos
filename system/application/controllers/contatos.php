@@ -63,6 +63,7 @@
 						->offset(($pagina_atual - 1) * $itens_por_pagina)
 						->execute();
 			
+			// calcula total de paginas
 			$total_de_paginas = ceil($total_rows / $itens_por_pagina);
 			
 			$data['total_rows'] = $total_rows;
