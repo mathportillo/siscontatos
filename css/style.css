@@ -12,7 +12,6 @@ body {
 	font-family: Arial, sans-serif;
 	font-size: 9pt;
 	background-color: #004600;
-	
 }
 
 .simplefont {
@@ -169,12 +168,8 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 	float: right;
 }
 
-#div_menu {
-	text-align: right;
-}
-
 #div_menu a {
-	line-height: 20px;
+	line-height: 21px;
 	height: 22px;
 	margin: 0px 0px 0px 2px;
 	display: inline-table;
@@ -187,6 +182,32 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 	border-radius: 0px 0px 5px 5px;
 	border: solid 1px #004600;
 	border-top: none;
+}
+
+#div_lista_agendas {
+	float: left;
+}
+
+#div_lista_agendas select {
+	font-size: 9pt;
+	font-weight: bold;
+	line-height: 22px;
+	height: 22px;
+	margin: 0px 0px 0px 7px;
+	display: inline-table;
+	width: 200px;
+	background: #004600;
+	color: white;
+	text-align: center;
+	-webkit-border-radius: 0px 0px 5px 5px;
+	-moz-border-radius: 0px 0px 5px 5px;
+	border-radius: 0px 0px 5px 5px;
+	border: solid 1px #004600;
+	border-top: none;
+}
+
+#div_botoes {
+	text-align: right;
 }
 
 #div_menu a:hover {

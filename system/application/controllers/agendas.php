@@ -71,13 +71,25 @@
 		// Função salvar - Salva o que foi entrado no form de Agenda
 		public function salvar()
 		{
+			$obj_permissao = null;
 			if (!$this->input->post('id')) {
 				$obj_agenda = new Agenda();
+
+				$obj_permissao = new Permissao();
+				$obj_permissao->Agenda = $obj_agenda;
+				$obj_permissao->Usuario = Usuario::atual();
+				$obj_permissao->pode_visualizar = true;
+				$obj_permissao->pode_editar = true;
+				$obj_permissao->pode_gerenciar = true;
 			} else {
 				$obj_agenda = Doctrine::getTable('Agenda')->find($this->input->post('id'));
 			}
 			$obj_agenda->nome = $this->input->post('nome');
 			$obj_agenda->save();
+			if ($obj_permissao) {
+				//$obj_agenda = Doctrine::getTable('Agenda')->findOneByNome($this->input->post('nome'));
+				$obj_permissao->save();
+			}
 			redirect('agendas');
 		}
 	}

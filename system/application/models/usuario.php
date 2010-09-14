@@ -33,6 +33,16 @@ class Usuario extends Doctrine_Record
 		}
 	}
 	
+	public function getAgendas()
+	{
+		$obj_agendas = Doctrine_Query::create()
+							->from('Agenda a')
+							->innerJoin('a.Permissoes p ON p.usuario_id = ' . $this->id)
+							->execute();
+							
+		return $obj_agendas;
+	}
+	
 	public function setTableDefinition()
 	{
 		$this->hasColumn('username', 'string', 255);

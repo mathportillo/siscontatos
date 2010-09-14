@@ -46,7 +46,19 @@
 				</div>
 			</div>
 			<div id="div_menu">
-				<? $this->load->view('menu_view'); ?>&nbsp;
+				<div id="div_lista_agendas">
+					<?= form_open('util/muda_agenda', 'id="form_muda_agenda"') ?>
+						<?= form_hidden('redirect', substr($this->uri->uri_string(), 1, strlen($this->uri->uri_string()) - 1)) ?>
+						<select name="agenda" size="1" onchange="javascript:form_muda_agenda.submit();">
+							<? foreach (Usuario::atual()->getAgendas() as $obj_agenda) { ?>
+								<option value="<?= $obj_agenda->id ?>" <?=($obj_agenda->id == $this->session->userdata('agenda') ? 'selected="true"' : '') ?>><?= $obj_agenda->nome ?></option>
+							<? } ?>
+						</select>
+					<?= form_close() ?>
+				</div>
+				<div id="div_botoes">
+					<? $this->load->view('menu_view'); ?>&nbsp;
+				</div>
 			</div>
 			<div id="div_maincontent"> 
 

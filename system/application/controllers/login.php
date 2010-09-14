@@ -26,7 +26,14 @@
 		function _entrou($u1)
 		{
 			$this->session->set_userdata('id', $u1->id);
-			$this->session->set_userdata('agenda', 1);
+			$obj_agendas = $u1->getAgendas();
+			if (count($obj_agendas) == 0) {
+				redirect('login/sair');	
+				die();	
+			}
+			foreach ($obj_agendas as $obj_agenda) break;
+	
+			$this->session->set_userdata('agenda', $obj_agenda->id);
 			redirect('principal');
 		}
 
