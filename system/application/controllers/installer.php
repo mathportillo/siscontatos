@@ -6,7 +6,6 @@
 
 	class Installer extends Controller
 	{
-	
 		// Função create_tables - Cria as tabelas baseado no modelo
 		public function create_tables()
 		{
@@ -40,7 +39,7 @@
 			$novo_permissao->pode_gerenciar = true;
 			$novo_permissao->save();
 		}
-	
+		
 		// Função index - Instala o banco de dados 
 		public function index()
 		{
@@ -52,10 +51,10 @@
 			<?
 			echo "Criando Banco de Dados...<br /><br />";
 			try {
-				Doctrine::createDatabases();
-				$obj_conn = Doctrine_Manager::getInstance()->getConnection("default");
-				$obj_conn->setCharset("utf8");
-				$obj_conn->setCollate("utf8_general_ci");
+				//Doctrine::createDatabases();
+				//$obj_conn = Doctrine_Manager::getInstance()->getConnection("default");
+				//$obj_conn->setCharset("utf8");
+				//$obj_conn->setCollate("utf8_general_ci");
 				try {
 					echo "Criando Tabelas...<br /><br />";
 					$this->create_tables();
