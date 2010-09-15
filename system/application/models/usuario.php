@@ -37,7 +37,7 @@ class Usuario extends Doctrine_Record
 	{
 		$obj_agendas = Doctrine_Query::create()
 							->from('Agenda a')
-							->innerJoin('a.Permissoes p ON p.usuario_id = ' . $this->id)
+							->innerJoin('a.Permissoes p ON p.agenda_id = a.id AND p.usuario_id = ' . $this->id)
 							->execute();
 							
 		return $obj_agendas;

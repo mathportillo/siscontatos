@@ -1,5 +1,8 @@
 <? $this->load->view('_template_open_view'); ?>
 <div id="div_contatos">
+	<div style="height: 28px">
+		<?= (isset($aviso) ? '<p><b>' . $aviso . '</b></p>' : '') ?>
+	</div>
 	<?= form_open('contatos/index', 'id="form_busca"') ?>
 	<?= form_hidden('pagina_atual', $pagina_atual) ?>
 	<?= form_hidden('itens_por_pagina', $itens_por_pagina) ?>

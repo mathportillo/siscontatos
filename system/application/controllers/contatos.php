@@ -24,6 +24,11 @@
 		// TODO: Remover falha de SQL injection
 		public function index()
 		{	
+			$this->_lista_contatos();
+		}
+		
+		public function _lista_contatos($data = array())
+		{
 			$itens_por_pagina = 20;
 			if ($this->input->post('busca')) {
 				$busca = $this->input->post('busca');
@@ -73,6 +78,7 @@
 			$data['total_de_paginas'] = $total_de_paginas;
 			$data['contatos'] = $result;
 			$data['busca'] = $busca;
+			
 			$this->load->view('contatos_view',$data);
 		}
 		
@@ -104,9 +110,11 @@
 			}
 			if ($this->uri->segment(3) != '') {
 				$novo_contato = Doctrine::getTable('Contato')->find($this->uri->segment(3));
+				$data['aviso'] =  'Contato ' . $novo_contato->nome . ' exclu&iacute;do com sucesso';
 				$novo_contato->delete();
 			}
-			redirect('contatos');
+			
+			$this->_lista_contatos($data);
 		}
 		
 		// Função auxiliar _carrega_editar - configura as variáveis de entrada da View
@@ -302,8 +310,9 @@
 			$novo_contato->observacao = $this->input->post('observacao');
 			$novo_contato->agenda_id = $this->session->userdata('agenda');
 			$novo_contato->save();
-		
-			redirect('contatos');
+			
+			$data['aviso'] = 'Contato ' . $novo_contato->nome . ($this->input->post('id') == '' ? ' criado' : ' alterado') . ' com sucesso';
+			$this->_lista_contatos($data);
 		}
 		
 		// Função _submit_validate - valida o form de Contato
@@ -373,6 +382,7 @@
 			$theData = fgets($fh);
 
 			while ($theData = fgets($fh)) {
+				
 				$arr_data = explode(';', $theData);
 				$obj_contato = new Contato();
 				

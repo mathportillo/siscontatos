@@ -11,7 +11,7 @@
 |	http://example.com/
 |
 */
-$config['base_url']	= "http://172.25.4.65/siscontatos/";
+$config['base_url']	= "http://localhost/siscontatos/";
 
 /*
 |--------------------------------------------------------------------------

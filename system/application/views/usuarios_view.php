@@ -1,4 +1,7 @@
 <? $this->load->view('_template_open_view'); ?>
+<div style="padding-bottom: 2px; float: left">
+	<?= (isset($aviso) ? '<p><b>' . $aviso . '</b></p>' : '') ?>
+</div>
 <div align="right" style="padding-bottom: 2px; margin: 0px auto; width: 796px;">
 	<?= anchor('usuarios/adicionar', 'Novo Usu&aacute;rio', 'class="itembutton"'); ?>
 </div>

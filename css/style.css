@@ -146,7 +146,7 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 	color: #004600;
 	background: white;
 	margin: 20px auto;	
-	width: 80%;
+	width: 1050px;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	-khtml-border-radius: 10px;
@@ -233,7 +233,7 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 }
 
 #div_contatos {
-	width: 720px;
+	width: 870px;
 	margin: auto;
 }
 
@@ -250,13 +250,13 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 #div_cabecalho {
 	background: #004600;
 	height: 59px;
-	width: 720px;
+	width: 870px;
 	padding-top: 5px;
 }
 
 #div_cabecalho_margin {
 	height: 59px;
-	width: 710px;
+	width: 860px;
 	margin: 0px 5px;
 }
 
@@ -406,7 +406,7 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 }
 
 #div_fichas {
-	width: 710px;
+	width: 860px;
 	float: left;
 	background: #FFFFFF;
 	height: 100%;
@@ -415,7 +415,7 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 #div_fichas_margin {
 	margin: 0px 5px;
 	height: 100%;
-	width: 700px;
+	width: 850px;
 }
 
 .ficha {
@@ -429,7 +429,7 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 
 .ficha_margin {
 	padding-top: 5px;
-	width: 690px;
+	width: 840px;
 	margin: 0px 5px 5px 5px;
 }
 
@@ -465,7 +465,7 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 .ficha .ficha_acoes {
 	text-align: right;
 	float: right;
-	width: 6%;
+	width: 5%;
 }
 
 .espaco_inferior {
@@ -479,11 +479,11 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 #div_rodape {
 	background: #004600;
 	height: 37px;
-	width: 720px;
+	width: 870px;
 }
 
 #div_rodape_margin {
-	width: 710px;
+	width: 860px;
 	margin: 0px 5px;
 }
 

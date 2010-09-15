@@ -22,16 +22,18 @@
 		// Função Principal do Controller - Lista os Usuários 
 		public function index()
 		{
-			/*$result = Doctrine_Query::create()
-						->from('Usuario')
-						->orderby('username')
-						->execute();*/
+			$this->_lista_usuarios();
+		}
+		
+		public function _lista_usuarios($data = array())
+		{
 			$result = Doctrine_Query::create()
 						->from('Usuario u')
 						->innerJoin('u.Permissoes p ON p.usuario_id = u.id AND p.agenda_id =' . $this->session->userdata('agenda'))
 						->orderby('username')
 						->execute();
 			$data['usuarios'] = $result;
+			
 			$this->load->view('usuarios_view',$data);
 		}
 
@@ -59,16 +61,17 @@
 		}
 
 		// Chama a View de Propriedades de Usuário para Edição
-		public function editar()
+		public function editar($usuario_id, $mensagem = '')
 		{
 			$obj_usuarios = Doctrine_Query::create()
 										->from('Usuario u')
 										->leftJoin('u.Permissoes p ON u.id = p.usuario_id AND p.agenda_id = ' . $this->session->userdata('agenda'))
-										->where('u.id = ' . $this->uri->segment(3))
+										->where('u.id = ' . $usuario_id)
 										->execute();
 			foreach ($obj_usuarios as $obj_usuario)
 				$data['obj_usuario'] = $obj_usuario;
 			
+			$data['mensagem'] = $mensagem;
 			$this->load->view('usuarios_editar_view', $data);
 		}
 
@@ -76,9 +79,8 @@
 		public function excluir()
 		{
 			if ($this->uri->segment(3) != '') {
-
 				$obj_usuario = Doctrine::getTable('Usuario')->find($this->uri->segment(3));
-				
+				$data['aviso'] = 'Usuário ' . $obj_usuario->username . ' removido da agenda ' . Agenda::atual()->nome;
 				$nperms = count($obj_usuario->Permissoes);
 
 				foreach ($obj_usuario->Permissoes as $obj_permissao) {
@@ -88,10 +90,12 @@
 					}
 				}
 				if ($nperms == 0) {
+					$data['aviso'] .= ' e excluido do sistema';
 					$obj_usuario->delete();
 				}
+				$data['aviso'] .= ' com sucesso';
 			}
-			redirect('usuarios');
+			$this->_lista_usuarios($data);
 		}
 
 		// Cria a Permissão / Usuário, e vai para a função de Edição
@@ -115,7 +119,7 @@
 				$obj_permissao->save();
 
 				$u1 = Doctrine::getTable('Usuario')->findOneByUsername($obj_usuario->username);
-				redirect('usuarios/editar/' . $u1->id);
+				$this->editar($u1->id, 'Usu&aacute;rio criado e adicionado &agrave; agenda ' . Agenda::atual()->nome . ' com sucesso');
 			} else {
 				$u1 = Doctrine::getTable('Usuario')->findOneByUsername($this->input->post('username'));
 				if ($u1) {
@@ -127,7 +131,8 @@
 					$obj_permissao->pode_gerenciar = ($this->input->post('pode_gerenciar') != '');
 					$obj_permissao->save();
 
-					redirect('usuarios');
+					$data['aviso'] = 'Usu&aacute;rio ' . $u1->username . ' adicionado &agrave; agenda ' . Agenda::atual()->nome . ' com sucesso';
+					$this->_lista_usuarios($data);
 				} else {
 					$value['username'] = $this->input->post('username');
 					$value['pode_visualizar'] = ($this->input->post('pode_visualizar') != '');
@@ -188,8 +193,9 @@
 			$obj_permissao->pode_editar = ($this->input->post('pode_editar') != '');
 			$obj_permissao->pode_gerenciar = ($this->input->post('pode_gerenciar') != '');
 			$obj_permissao->save();
-
-			redirect('usuarios');
+			
+			$data['aviso'] = 'Usuário ' . $obj_usuario->username . ' alterado com sucesso';
+			$this->_lista_usuarios($data);
 		}		
 		
 		// Função de Validação de campos de Edição de Usuário

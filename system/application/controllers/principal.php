@@ -33,7 +33,8 @@
 				$u1 = Doctrine::getTable('Usuario')->findOneByUsername(Usuario::atual()->username);
 				$u1->password = $this->input->post('newpassword');
 				$u1->save();
-				redirect('principal');
+				$data['aviso'] = 'Senha alterada com sucesso!';
+				$this->load->view('principal_view', $data);
 			}
 		}
 

@@ -7,7 +7,6 @@
 		$arr_result = explode('-', $str);
 		return '+' . $arr_result[0] . ' ' . $arr_result[1] . ' ' . $arr_result[2];
 	}
-
 ?>
 <? if($total_rows > 0) { ?>
 	<? $lin = 0; ?>
@@ -60,7 +59,7 @@
 					<b>Localiza&ccedil;&atilde;o:</b> <?= $contato->cidade ?><?= ($contato->cidade && $contato->estado ? ',' : '') ?> <?= $contato->estado ?><?= ($contato->estado && $contato->pais ? ',' : '') ?> <?= $contato->pais ?>
 				</div><div class="ficha_acoes">
 					<img src="<?= base_url() ?>img/add.gif" title="<?= $contato->observacao ?>"/>
-				</div><div class="ficha_direita" style="width: 33%">
+				</div><div class="ficha_direita" style="width: 34%">
 					<b>CEP:</b> <?= $contato->cep ?>
 				</div>
 			</div>

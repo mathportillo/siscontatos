@@ -7,7 +7,8 @@
 <?= form_hidden('id', ($obj_usuario ? $obj_usuario->id : '')) ?>
 
 <div>
-	<b><?= ($obj_usuario ? "Editar Usu&aacute;rio" : "Novo Usu&aacute;rio") ?></b><br /><br />
+	<?= (isset($mensagem) ? '<b>' . $mensagem . '</b><br /><br />' : '') ?>
+	<b><?= ($obj_usuario ? 'Editar Usu&aacute;rio' : 'Novo Usu&aacute;rio') ?></b><br /><br />
 </div>
 
 <table border="0" class="simplefont">
