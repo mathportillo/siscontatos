@@ -16,17 +16,17 @@
 		<div class="ficha<?= ($lin < $linmax ? ' marginbaixo' : '') ?>"><div class="ficha_margin">
 			<div class="linhazona">
 				<div class="ficha_esquerda">
-					<?= htmlentities($contato->nome) ?>
+					<?= htmlentities($contato->nome,ENT_QUOTES,'UTF-8') ?>
 				</div><div class="ficha_acoes">
 					<? if (Usuario::atual()->Permissoes[0]->pode_editar) { ?>
 						<?= anchor('contatos/editar/' . $contato->id,'<img src="' . base_url() . 'img/edit.gif" border="0" title="Editar" />') ?>
-						<?= anchor('contatos/excluir/' . $contato->id,'<img src="' . base_url() . 'img/remove.gif" border="0" title="Excluir" />', 'onclick="javascript:if (confirm(\'Você realmente deseja excluir o contato ' . addslashes(htmlentities($contato->nome)) . '?\')) { return true; } else { return false; }"') ?>
+						<?= anchor('contatos/excluir/' . $contato->id,'<img src="' . base_url() . 'img/remove.gif" border="0" title="Excluir" />', 'onclick="javascript:if (confirm(\'Você realmente deseja excluir o contato ' . addslashes(htmlentities($contato->nome,ENT_QUOTES,'UTF-8')) . '?\')) { return true; } else { return false; }"') ?>
 					<? } ?>
 				</div>
 			</div>
 			<div class="linha">
 				<div class="ficha_esquerda">
-					<b>Entidade:</b> <?= htmlentities($contato->entidade) ?>
+					<b>Entidade:</b> <?= htmlentities($contato->entidade,ENT_QUOTES,'UTF-8') ?>
 				</div><div class="ficha_direita">
 					<b>Cargo:</b> <?= $contato->cargo ?>
 				</div>

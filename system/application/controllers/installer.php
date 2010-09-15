@@ -52,9 +52,9 @@
 			echo "Criando Banco de Dados...<br /><br />";
 			try {
 				//Doctrine::createDatabases();
-				//$obj_conn = Doctrine_Manager::getInstance()->getConnection("default");
-				//$obj_conn->setCharset("utf8");
-				//$obj_conn->setCollate("utf8_general_ci");
+				$obj_conn = Doctrine_Manager::getInstance()->getConnection("default");
+				$obj_conn->setCharset("utf8");
+				$obj_conn->setCollate("utf8_general_ci");
 				try {
 					echo "Criando Tabelas...<br /><br />";
 					$this->create_tables();
