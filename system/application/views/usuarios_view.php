@@ -1,11 +1,11 @@
 <? $this->load->view('_template_open_view'); ?>
-<div style="padding-bottom: 2px; float: left">
-	<?= (isset($aviso) ? '<p><b>' . $aviso . '</b></p>' : '') ?>
+<div align="center" style="margin: 0px auto; width: 796px;">
+	<div style="float: left; width: 696px; height: 22px; line-height: 22px;">
+		<?= (isset($aviso) ? '<b>' . $aviso . '</b>' : '') ?>
+	</div>
+	<?= anchor('usuarios/adicionar', 'Novo Usu&aacute;rio', 'class="itembutton" style="float: right;"'); ?>
 </div>
-<div align="right" style="padding-bottom: 2px; margin: 0px auto; width: 796px;">
-	<?= anchor('usuarios/adicionar', 'Novo Usu&aacute;rio', 'class="itembutton"'); ?>
-</div>
-<table align="center" border="0" class="alternedcolortable simplefont w800">
+<table align="center" border="0" class="alternedcolortable simplefont w800" style="clear: both;">
 	<thead>
 		<th class="redondoesquerdacima">Nome do Usu&aacute;rio</th>
 		<th class="redondodireitacima">Nome</th>

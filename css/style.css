@@ -123,7 +123,7 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 }
 
 .itembutton {
-	line-height: 21px;
+	line-height: 22px;
 	height: 22px;
 	color: #ffffff;
 	background: #004600;
@@ -169,7 +169,7 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 }
 
 #div_menu a {
-	line-height: 21px;
+	line-height: 22px;
 	height: 22px;
 	margin: 0px 0px 0px 2px;
 	display: inline-table;
@@ -278,7 +278,7 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 	color: #FFFFFF;
 	float: left;
 	height: 22px;
-	line-height: 21px;
+	line-height: 22px;
 	padding: 0px 2px;
 }
 
@@ -294,7 +294,7 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 .spanbox {
 	float: left;
 	height: 22px;
-	line-height: 21px;
+	line-height: 22px;
 	padding: 0px 2px;
 	color: #004600;
 	background: #DDFFDD;
@@ -354,7 +354,7 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 #div_paginacao a {
 	float: left;
 	height: 22px;
-	line-height: 21px;
+	line-height: 22px;
 	margin-right: 2px;
 	color: #004600;
 	background: #DDFFDD;
@@ -372,7 +372,7 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 	float: left;
 	height: 22px;
 	width: 22px;
-	line-height: 21px;
+	line-height: 22px;
 	margin-right: 2px;
 	color: #004600;
 	background: #FFFFFF;

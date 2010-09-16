@@ -21,6 +21,11 @@
 		// Função Principal - Lista as Agendas
 		public function index()
 		{
+			$this->_lista_agendas();
+		}
+		
+		public function _lista_agendas($data = array())
+		{
 			$result = Doctrine_Query::create()
 						->from('Agenda')
 						->orderby('nome')
@@ -46,16 +51,30 @@
 		// Função excluir - Exclui uma agenda
 		public function excluir()
 		{
+			$obj_agenda = Doctrine::getTable('Agenda')->find($this->uri->segment(3));
+			
+			$data['aviso'] = 'Agenda ' . $obj_agenda->nome;
+			
+			$obj_deletar_usuarios = array();
+			$i = 0;
+			$obj_usuarios = Doctrine::getTable('Usuario')->findAll();
+			foreach ($obj_usuarios as $obj_usuario) {
+				if (count($obj_usuario->Permissoes) == 1 && $obj_usuario->Permissoes[0]->agenda_id == $obj_agenda->id) {
+					$obj_deletar_usuarios[$i++] = $obj_usuario;
+				}
+			}		
 			$query = Doctrine_Query::create()
 						->delete('Permissao')
-						->where('agenda_id = ' . $this->uri->segment(3));
+						->where('agenda_id = ' . $obj_agenda->id);
 			$query->execute();
-
-			$obj_usuarios = Doctrine::getTable('Usuario');
-			foreach ($obj_usuarios as $obj_usuario) {
-				if ($obj_usuario->Permissoes == 0) {
-					$obj_usuario->delete();
-				}
+			
+			foreach ($obj_deletar_usuarios as $obj_usuario) {
+				$obj_usuario->delete();
+			}
+			if ($i > 0) {
+				$data['aviso'] .= ' e seu(s) usu&aacute;rio(s) exclusivos eliminados';
+			} else {
+				$data['aviso'] .= ' eliminada';
 			}
 
 			$query = Doctrine_Query::create()
@@ -63,9 +82,10 @@
 						->where('agenda_id = ' . $this->uri->segment(3));
 			$query->execute();
 
-			$obj_agenda = Doctrine::getTable('Agenda')->find($this->uri->segment(3));
+			$data['aviso'] .= ' com sucesso';
+			
 			$obj_agenda->delete();
-			redirect('agendas');
+			$this->_lista_agendas($data);
 		}
 
 		// Função salvar - Salva o que foi entrado no form de Agenda
@@ -90,7 +110,8 @@
 				//$obj_agenda = Doctrine::getTable('Agenda')->findOneByNome($this->input->post('nome'));
 				$obj_permissao->save();
 			}
-			redirect('agendas');
+			$data['aviso'] = 'Agenda ' . $obj_agenda->nome . (!$this->input->post('id') ? ' criada' : ' alterada') . ' com sucesso';
+			$this->_lista_agendas($data);
 		}
 	}
 ?>
