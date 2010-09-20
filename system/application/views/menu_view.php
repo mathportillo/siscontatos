@@ -19,3 +19,9 @@
 	<?= anchor('agendas', 'Agendas') ?>
 
 <? } ?>
+
+<? if (usuario::atual()->pode_administrar) {  ?>
+	
+	<?= anchor('configuracoes','Configura&ccedil;&otilde;es') ?>
+	
+<? } ?>
