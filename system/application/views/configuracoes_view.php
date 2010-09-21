@@ -22,6 +22,8 @@
 			<td colspan="2">Nome:</td>
 			<td><?= form_input('nome', Usuario::atual()->nome, 'class="normal_input"') ?></td>
 		</tr>
+		<?= form_open('configuracoes/salvar','id="form_configuracoes"') ?>
+		
 		<tr>
 			<td colspan="2">Fichas por P&aacute;gina:</td>
 			<td><?= form_input('fichaspp', '', 'class="normal_input" maxlength="3"') ?></td>
@@ -44,6 +46,12 @@
 				</select>
 			</td>
 		</tr>
+		<tr>
+			<td colspan="3">
+				<?= form_close() ?>
+				 <div align="center">
+		        <a class="itembutton" href="javascript:" onclick="form_configuracoes.submit();">Ok</a>
+			</td>		
 	</tbody>
 </table>
 
