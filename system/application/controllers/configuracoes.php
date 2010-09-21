@@ -24,9 +24,8 @@ class Configuracoes extends Controller
 		$this->load->view('configuracoes_view',$data);
 	}
  
-	public function salvar()
+	public function salvar_preferencias()
 	{
-		
 		// Salva o Fichas PP
 		$obj_configuracoes = Doctrine_Query::create()
 								->from('Configuracao')
