@@ -26,7 +26,7 @@
 		
 		<tr>
 			<td colspan="2">Fichas por P&aacute;gina:</td>
-			<td><?= form_input('fichaspp', '', 'class="normal_input" maxlength="3"') ?></td>
+			<td><?= form_input('fichaspp', $fichaspp, 'class="normal_input" maxlength="3"') ?></td>
 		</tr>
 		<tr>
 			<td colspan="2">Agenda Inicial:</td>
