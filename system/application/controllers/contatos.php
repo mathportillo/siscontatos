@@ -29,7 +29,8 @@
 		
 		public function _lista_contatos($data = array())
 		{
-			$itens_por_pagina = 20;
+			$itens_por_pagina = Usuario::atual()->getConfiguracao('fichaspp');
+			
 			if ($this->input->post('busca')) {
 				$busca = $this->input->post('busca');
 			} else {

@@ -43,6 +43,17 @@ class Usuario extends Doctrine_Record
 		return $obj_agendas;
 	}
 	
+	public function getConfiguracao($nome)
+	{
+		$obj_configuracoes = Doctrine_Query::create()
+								->from('Configuracao c')
+								->where('c.usuario_id = ' . $this->id)
+								->andWhere('c.nome = \'' . $nome . '\'')
+								->execute();
+		foreach ($obj_configuracoes as $obj_configuracao) break;
+		return $obj_configuracao->valor;
+	}
+	
 	public function setTableDefinition()
 	{
 		$this->hasColumn('username', 'string', 255);

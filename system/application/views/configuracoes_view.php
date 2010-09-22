@@ -35,7 +35,7 @@
 	</div>
 	
 	<div style="float: right;">
-		<?= form_open('configuracoes/salvar_preferencias','id="form_preferencias	"') ?>
+		<?= form_open('configuracoes/salvar_preferencias','id="form_preferencias"') ?>
 		
 		<div>
 			<b>Prefer&ecirc;rencias Pessoais</b><br /><br />
@@ -49,13 +49,14 @@
 				<tr>
 					<td>Agenda Inicial:</td>
 					<td>
-						<select name="agenda_inicial" size="1" class="normal_select">
+						<select name="agendainicial" size="1" class="normal_select">
 							<? foreach (Usuario::atual()->getAgendas() as $obj_agenda) { ?>
-								<option value="<?= $obj_agenda->id ?>" <?=($obj_agenda->id == $this->session->userdata('agenda') ? 'selected="true"' : '') ?>><?= $obj_agenda->nome ?></option>
+								<option value="<?= $obj_agenda->id ?>" <?=($obj_agenda->id == Usuario::atual()->getConfiguracao('agendainicial') ? 'selected="true"' : '') ?>><?= $obj_agenda->nome ?></option>
 							<? } ?>
 						</select>
 					</td>
 				</tr>
+				<!--
 				<tr>
 					<td>Tema:</td>
 					<td>
@@ -64,6 +65,7 @@
 						</select>
 					</td>
 				</tr>
+				-->
 			</tbody>
 		</table><br />
 		<div align="center" style="clear: both; margin-top: 41px">

@@ -47,6 +47,25 @@ class Configuracoes extends Controller
 		$obj_configuracao->save();
 		
 		// Salva Agenda Inicial
+		$obj_configuracoes = Doctrine_Query::create()
+								->from('Configuracao')
+								->where('usuario_id = ' . Usuario::atual()->id)
+								->andWhere('nome = \'agendainicial\'')
+								->execute();
+
+		if (count($obj_configuracoes) == 0) {
+			$obj_configuracao = new Configuracao();
+			$obj_configuracao->usuario_id = Usuario::atual()->id;
+			$obj_configuracao->agenda_id = 0; // TODO: Usar agenda_id na configuracao
+			$obj_configuracao->nome = 'agendainicial';
+		} else {
+			foreach ($obj_configuracoes as $obj_configuracao) break;
+		}
+		
+		$obj_configuracao->valor = $this->input->post('agendainicial');
+		
+		$obj_configuracao->save();
+		
 		// Salva Tema
 		redirect('configuracoes'); 
 	}
