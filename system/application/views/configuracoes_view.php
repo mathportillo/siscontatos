@@ -1,7 +1,7 @@
 <? $this->load->view('_template_open_view'); ?>
 <div align="center" style="width: 700px; margin: auto; height: 183px;">
 	<div style="float: left;">
-		<?= form_open('configuracoes/salvar_configuracoes','id="form_configuracoes	"') ?>
+		<?= form_open('configuracoes/salvar_configuracoes','id="form_configuracoes"') ?>
 		<div>
 			<b>Configura&ccedil;&otilde;es do Usu&aacute;rio</b><br /><br />
 		</div>
@@ -28,8 +28,12 @@
 				</tr>
 			</tbody>
 		</table><br />
+    <div align="center">
+        <a class="itembutton" href="javascript:" onclick="form_configuracoes.submit();">Salvar</a>
+    </div>
+		</table><br />
 		<div align="center" style="clear: both">
-			<a class="itembutton" href="javascript:" onclick="form_configuracoes.submit();">Salvar</a>
+			
 		</div>
 		<?= form_close() ?>
 	</div>
@@ -56,7 +60,7 @@
 						</select>
 					</td>
 				</tr>
-				<!--
+				
 				<tr>
 					<td>Tema:</td>
 					<td>
@@ -65,7 +69,7 @@
 						</select>
 					</td>
 				</tr>
-				-->
+				
 			</tbody>
 		</table><br />
 		<div align="center" style="clear: both; margin-top: 41px">

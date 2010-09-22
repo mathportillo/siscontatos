@@ -8,6 +8,12 @@
  
 class Configuracoes extends Controller 
 {
+	public function Configuracoes()
+	{
+		parent::Controller();
+		$this->load->library('form_validation');
+	}
+	
 	public function index()
 	{
 		$obj_configuracoes = Doctrine_Query::create()
@@ -26,7 +32,7 @@ class Configuracoes extends Controller
  
 	public function salvar_preferencias()
 	{
-		// Salva o Fichas PP
+		// Salva as Fichas PP
 		$obj_configuracoes = Doctrine_Query::create()
 								->from('Configuracao')
 								->where('usuario_id = ' . Usuario::atual()->id)
@@ -68,7 +74,40 @@ class Configuracoes extends Controller
 		
 		// Salva Tema
 		redirect('configuracoes'); 
+	
 	}
+	public function salvar_configuracoes() {
+		if (!$this->_alterarsenha_submit_validate()) {
+			$this->load->view('alterarsenha_view');
+		} else {
+			$u1 = Doctrine::getTable('Usuario')->findOneByUsername(Usuario::atual()->username);
+			$u1->password = $this->input->post('newpassword');
+			$u1->save();
+			$data['aviso'] = 'Senha alterada com sucesso!';
+			$this->load->view('principal_view', $data);
+		}
+	}
+	
+	public function _alterarsenha_submit_validate() {
+			$this->form_validation->set_rules('password', 'Senha Atual',
+						'required|callback_authenticate');
+			$this->form_validation->set_rules('newpassword', 'Nova Senha',
+						'required');
+			$this->form_validation->set_rules('newpassword_confirm', 'Confirmar Nova Senha',
+						'required|matches[newpassword]');
+			$this->form_validation->set_message('authenticate', 'Senha atual inv&aacute;lida');
+			return $this->form_validation->run();
+	}
+	
+	public function authenticate() {
+			$u1 = Doctrine::getTable('Usuario')->findOneByUsername(Usuario::atual()->username);
+			$u2 = new Usuario();
+			$u2->password = $this->input->post('password');
+			if ($u1->password != $u2->password) {
+				return false;
+			}
+			return true;
+		}
 }		
 ?>
 		
