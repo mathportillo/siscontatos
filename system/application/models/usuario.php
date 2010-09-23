@@ -50,8 +50,28 @@ class Usuario extends Doctrine_Record
 								->where('c.usuario_id = ' . $this->id)
 								->andWhere('c.nome = \'' . $nome . '\'')
 								->execute();
+		
+		$obj_configuracao = null;
+		
 		foreach ($obj_configuracoes as $obj_configuracao) break;
+		
+		if (!$obj_configuracao) {
+			return ''; 
+		}
 		return $obj_configuracao->valor;
+	}
+	
+	public function assertConfiguracao($nome)
+	{
+		$obj_configuracao = Usuario::getConfiguracao($nome);
+		
+		if ($obj_configuracao == '') {
+			$obj_configuracao = new Configuracao();
+			$obj_configuracao->usuario_id = Usuario::atual()->id;
+			$obj_configuracao->nome = 'fichaspp';
+		}
+		
+		return $obj_configuracao;
 	}
 	
 	public function setTableDefinition()

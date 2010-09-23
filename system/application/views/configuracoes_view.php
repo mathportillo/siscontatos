@@ -8,13 +8,6 @@
 		<table class="simplefont">
 			<tbody>
 				<tr>
-					<td>Nome:</td>
-					<td><?= form_input('nome', Usuario::atual()->nome, 'class="normal_input"') ?></td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
 					<td>Senha Atual:</td>
 					<td><?= form_password('password', '', 'class="normal_input" onkeyup="javascript:submitenter(this,event);"') ?></td>
 				</tr>
@@ -25,6 +18,13 @@
 				<tr>
 					<td>Confirmar Nova Senha:</td>
 					<td><?= form_password('newpassword_confirm', '', 'class="normal_input" onkeyup="javascript:submitenter(this,event);"') ?></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>Nome:</td>
+					<td><?= form_input('nome', Usuario::atual()->nome, 'class="normal_input"') ?></td>
 				</tr>
 			</tbody>
 		</table><br />

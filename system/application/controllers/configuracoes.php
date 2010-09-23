@@ -16,74 +16,44 @@ class Configuracoes extends Controller
 	
 	public function index()
 	{
-		$obj_configuracoes = Doctrine_Query::create()
-								->from('Configuracao')
-								->where('usuario_id = ' . Usuario::atual()->id)
-								->andWhere('nome = \'fichaspp\'')
-								->execute();
-		if (count($obj_configuracoes) == 0) {
-			$data['fichaspp'] = 20;
-		} else {
-			foreach ($obj_configuracoes as $obj_configuracao) break;
-			$data['fichaspp'] = $obj_configuracao->valor;
-		}
+		$this->_lista_configuracoes();
+	}
+	
+	public function _lista_configuracoes($data = array())
+	{
+		$data['fichaspp'] = Usuario::atual()->getConfiguracao('fichaspp');
 		$this->load->view('configuracoes_view',$data);
 	}
  
-	public function salvar_preferencias2()
+	public function salvar_preferencias()
 	{
 		// Salva as Fichas PP
-		$obj_configuracoes = Doctrine_Query::create()
-								->from('Configuracao')
-								->where('usuario_id = ' . Usuario::atual()->id)
-								->andWhere('nome = \'fichaspp\'')
-								->execute();
-		
-		foreach ($obj_configuracoes as $obj_configuracao) break;
-		$obj_configuracao->usuario_id = Usuario::atual()->id;
-		$obj_configuracao->nome = 'fichaspp';
+		$obj_configuracao = Usuario::assertConfiguracao('fichaspp');
 		$obj_configuracao->valor = $this->input->post('fichaspp');
 		$obj_configuracao->save();
 		
 		// Salva Agenda Inicial
-		$obj_configuracoes = Doctrine_Query::create()
-								->from('Configuracao')
-								->where('usuario_id = ' . Usuario::atual()->id)
-								->andWhere('nome = \'agendainicial\'')
-								->execute();
-		
-		foreach ($obj_configuracoes as $obj_configuracao) break;
-		$obj_configuracao->usuario_id = Usuario::atual()->id;
-		$obj_configuracao->nome = 'agendainicial';
+		$obj_configuracao = Usuario::assertConfiguracao('agendainicial');
 		$obj_configuracao->valor = $this->input->post('agendainicial');
 		$obj_configuracao->save();
 		
 		//  Salva Tema
-		$obj_configuracoes = Doctrine_query::create()
-								->from('configuracao')
-								->where('usuario_id = ' . usuario::atual()->id)
-								->andwhere('nome = \'tema\'')
-								->execute();
-								
-		foreach ($obj_configuracoes as $obj_configuracao) break;
-		$obj_configuracao->usuario_id = Usuario::atual()->id;
-		$obj_configuracao->nome = 'tema';
-		$obj_configuracao->valor= $this->input->post('tema');
-		$obj_configuracao->save();						
+		$obj_configuracao = Usuario::assertConfiguracao('tema');
+		$obj_configuracao->valor = $this->input->post('tema');
+		$obj_configuracao->save();		
 		
 		redirect('configuracoes');  
 	}
 	
 	public function salvar_configuracoes() {
 		if (!$this->_alterarsenha_submit_validate()) {
-			$this->load_view('alterarsenha_view');
+			$this->load_view('configuracoes_view');
 		} else {
 			$u1 = Doctrine::getTable('Usuario')->findOneByUsername(Usuario::atual()->username);
 			$u1->password = $this->input->post('newpassword');
 			$u1->save();
 			$data['aviso'] = 'Senha alterada com sucesso!';
-			$this->load->view('principal_view', $data);
-			
+			$this->_lista_configuracoes($data);
 		}
 	}
 	
