@@ -58,20 +58,32 @@ class Configuracoes extends Controller
 		$obj_configuracao->valor = $this->input->post('agendainicial');
 		$obj_configuracao->save();
 		
-		// TODO: Salva Tema
+		//  Salva Tema
+		$obj_configuracoes = Doctrine_query::create()
+								->from('configuracao')
+								->where('usuario_id = ' . usuario::atual()->id)
+								->andwhere('nome = \'tema\'')
+								->execute();
+								
+		foreach ($obj_configuracoes as $obj_configuracao) break;
+		$obj_configuracao->usuario_id = Usuario::atual()->id;
+		$obj_configuracao->nome = 'tema';
+		$obj_configuracao->valor= $this->input->post('tema');
+		$obj_configuracao->save();						
 		
-		redirect('configuracoes'); 
+		redirect('configuracoes');  
 	}
 	
 	public function salvar_configuracoes() {
 		if (!$this->_alterarsenha_submit_validate()) {
-			$this->load->view('alterarsenha_view');
+			$this->load_view('alterarsenha_view');
 		} else {
 			$u1 = Doctrine::getTable('Usuario')->findOneByUsername(Usuario::atual()->username);
 			$u1->password = $this->input->post('newpassword');
 			$u1->save();
 			$data['aviso'] = 'Senha alterada com sucesso!';
 			$this->load->view('principal_view', $data);
+			
 		}
 	}
 	
