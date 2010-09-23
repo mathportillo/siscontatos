@@ -104,14 +104,24 @@
 			if ($this->input->post('criar_usuario')) {
 				$obj_usuario = new Usuario();
 				$obj_usuario->username = $this->input->post('username');
-				$obj_usuario->nome = 'Usuário';
+				$obj_usuario->nome = $this->input->post('username');
 				$obj_usuario->password = $this->input->post('username');
 				$obj_usuario->pode_administrar = false;
 				$obj_usuario->ativo = true;
 				$obj_usuario->save();
 				
-				// TODO: Inicializa configurações
-
+				$obj_configuracao = new Configuracao();
+				$obj_configuracao->usuario_id = Usuario::atual()->id;
+				$obj_configuracao->nome = 'agendainicial';
+				$obj_configuracao->valor = Agenda::atual()->id;
+				$obj_configuracao->save();
+				
+				$obj_configuracao = new Configuracao();
+				$obj_configuracao->usuario_id = Usuario::atual()->id;
+				$obj_configuracao->nome = 'fichaspp';
+				$obj_configuracao->valor = '20';
+				$obj_configuracao->save();
+				
 				$obj_permissao = new Permissao();
 				$obj_permissao->usuario_id = $obj_usuario->id;
 				$obj_permissao->agenda_id = $this->session->userdata('agenda');

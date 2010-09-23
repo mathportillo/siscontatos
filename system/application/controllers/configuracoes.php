@@ -30,7 +30,7 @@ class Configuracoes extends Controller
 		$this->load->view('configuracoes_view',$data);
 	}
  
-	public function salvar_preferencias()
+	public function salvar_preferencias2()
 	{
 		// Salva as Fichas PP
 		$obj_configuracoes = Doctrine_Query::create()
@@ -38,18 +38,11 @@ class Configuracoes extends Controller
 								->where('usuario_id = ' . Usuario::atual()->id)
 								->andWhere('nome = \'fichaspp\'')
 								->execute();
-
-		if (count($obj_configuracoes) == 0) {
-			$obj_configuracao = new Configuracao();
-			$obj_configuracao->usuario_id = Usuario::atual()->id;
-			$obj_configuracao->agenda_id = 0; // TODO: Usar agenda_id na configuracao
-			$obj_configuracao->nome = 'fichaspp';
-		} else {
-			foreach ($obj_configuracoes as $obj_configuracao) break;
-		}
 		
+		foreach ($obj_configuracoes as $obj_configuracao) break;
+		$obj_configuracao->usuario_id = Usuario::atual()->id;
+		$obj_configuracao->nome = 'fichaspp';
 		$obj_configuracao->valor = $this->input->post('fichaspp');
-		
 		$obj_configuracao->save();
 		
 		// Salva Agenda Inicial
@@ -58,24 +51,18 @@ class Configuracoes extends Controller
 								->where('usuario_id = ' . Usuario::atual()->id)
 								->andWhere('nome = \'agendainicial\'')
 								->execute();
-
-		if (count($obj_configuracoes) == 0) {
-			$obj_configuracao = new Configuracao();
-			$obj_configuracao->usuario_id = Usuario::atual()->id;
-			$obj_configuracao->agenda_id = 0; // TODO: Usar agenda_id na configuracao
-			$obj_configuracao->nome = 'agendainicial';
-		} else {
-			foreach ($obj_configuracoes as $obj_configuracao) break;
-		}
 		
+		foreach ($obj_configuracoes as $obj_configuracao) break;
+		$obj_configuracao->usuario_id = Usuario::atual()->id;
+		$obj_configuracao->nome = 'agendainicial';
 		$obj_configuracao->valor = $this->input->post('agendainicial');
-		
 		$obj_configuracao->save();
 		
-		// Salva Tema
+		// TODO: Salva Tema
+		
 		redirect('configuracoes'); 
-	
 	}
+	
 	public function salvar_configuracoes() {
 		if (!$this->_alterarsenha_submit_validate()) {
 			$this->load->view('alterarsenha_view');
