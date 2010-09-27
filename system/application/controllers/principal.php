@@ -49,7 +49,7 @@
 			$this->form_validation->set_message('authenticate', 'Senha atual inv&aacute;lida');
 			return $this->form_validation->run();
 		}
-
+		
 		// Função auxiliar authenticate - Callback de form_validation para alteração de senha
 		public function authenticate() {
 			$u1 = Doctrine::getTable('Usuario')->findOneByUsername(Usuario::atual()->username);
@@ -60,6 +60,6 @@
 			}
 			return true;
 		}
-
+		
 	}
 ?>
