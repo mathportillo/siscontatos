@@ -16,7 +16,7 @@
 		function index()
 		{
 			if (Usuario::atual()) {
-				redirect('principal');
+				redirect('contatos');
 			}
 			$data['error'] = "";
 			$this->load->view('login_view',$data);
@@ -34,14 +34,14 @@
 			foreach ($obj_agendas as $obj_agenda) break;
 	
 			$this->session->set_userdata('agenda', $obj_agenda->id);
-			redirect('principal');
+			redirect('contatos');
 		}
 
 		// Função entrar - Processa os dados do form de login
 		function entrar()
 		{
 			if (Usuario::atual()) {
-				redirect('principal');
+				redirect('contatos');
 			}
 			$hora_atual = date('U');
 			$tempoA = 1800;
