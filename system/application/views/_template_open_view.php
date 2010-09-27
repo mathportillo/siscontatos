@@ -36,7 +36,7 @@
 		<div id="div_page">
 			<div id="div_header">
 				<div id="div_logo">
-					<?= anchor('principal', '<img src="' . base_url() . 'img/logo.gif" style="border: none;" />') ?>
+					<?= anchor('principal', '<img src="' . base_url() . 'img/logo_seplag.gif" style="border: none;" />') ?>
 					
 				</div>
 				<div id="div_info">
