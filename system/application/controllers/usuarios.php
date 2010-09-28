@@ -111,13 +111,13 @@
 				$obj_usuario->save();
 				
 				$obj_configuracao = new Configuracao();
-				$obj_configuracao->usuario_id = Usuario::atual()->id;
+				$obj_configuracao->usuario_id = $obj_usuario->id;
 				$obj_configuracao->nome = 'agendainicial';
 				$obj_configuracao->valor = Agenda::atual()->id;
 				$obj_configuracao->save();
 				
 				$obj_configuracao = new Configuracao();
-				$obj_configuracao->usuario_id = Usuario::atual()->id;
+				$obj_configuracao->usuario_id = $obj_usuario->id;
 				$obj_configuracao->nome = 'fichaspp';
 				$obj_configuracao->valor = '20';
 				$obj_configuracao->save();
