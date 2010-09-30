@@ -13,6 +13,10 @@ class Configuracao extends Doctrine_Record
 
 	public function  setUp()
 	{
+		$this->hasOne('Usuario', array(
+			'local' => 'usuario_id',
+			'foreign' => 'id'
+		));
 	}
 }
 

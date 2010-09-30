@@ -91,6 +91,15 @@
 				}
 				if ($nperms == 0) {
 					$data['aviso'] .= ' e excluido do sistema';
+					
+					$obj_usuario = Doctrine::getTable('usuario')->find($this->uri->segment(3));
+					
+					foreach ($obj_usuario->Configuracoes as $obj_configuracao) {
+						
+							$obj_configuracao->delete();
+
+					}
+					
 					$obj_usuario->delete();
 				}
 				$data['aviso'] .= ' com sucesso';

@@ -69,6 +69,13 @@
 			$query->execute();
 			
 			foreach ($obj_deletar_usuarios as $obj_usuario) {
+			
+				foreach ($obj_usuario->Configuracoes as $obj_configuracao) {
+					
+						$obj_configuracao->delete();
+
+				}
+				
 				$obj_usuario->delete();
 			}
 			if ($i > 0) {

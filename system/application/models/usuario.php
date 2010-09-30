@@ -96,6 +96,11 @@ class Usuario extends Doctrine_Record
 			'foreign' => 'usuario_id'
 		));
 		
+		$this->hasMany('Configuracao as Configuracoes', array(
+			'local' => 'id',
+			'foreign' => 'usuario_id'
+		));
+		
 		$this->hasMutator('password', '_encrypt_password');
 	}
 

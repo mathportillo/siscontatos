@@ -31,6 +31,18 @@
 			$novo_agenda->nome = "Principal";	
 			$novo_agenda->save();
 			
+			$obj_configuracao = new Configuracao();
+			$obj_configuracao->usuario_id = $novo_usuario->id;
+			$obj_configuracao->nome = 'agendainicial';
+			$obj_configuracao->valor = $novo_agenda->id;
+			$obj_configuracao->save();
+			
+			$obj_configuracao = new Configuracao();
+			$obj_configuracao->usuario_id = $novo_usuario->id;
+			$obj_configuracao->nome = 'fichaspp';
+			$obj_configuracao->valor = '20';
+			$obj_configuracao->save();
+			
 			$novo_permissao = new Permissao();
 			$novo_permissao->Usuario = $novo_usuario;
 			$novo_permissao->Agenda = $novo_agenda;	

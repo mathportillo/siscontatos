@@ -70,7 +70,7 @@
 						->execute();
 			
 			// calcula total de paginas
-			$total_de_paginas = ceil($total_rows / $itens_por_pagina);
+			$total_de_paginas = ceil ($total_rows / $itens_por_pagina);
 			
 			$data['total_rows'] = $total_rows;
 			$data['letra_inicial'] = $letra_inicial;

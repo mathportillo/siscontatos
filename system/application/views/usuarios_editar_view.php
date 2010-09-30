@@ -21,9 +21,16 @@
 				&nbsp;
 			</td></tr>
 		<? } ?>
+		<?
+			if (!Usuario::atual()->pode_administrar) {
+				$str_disabled = " disabled";
+			} else {
+				$str_disabled = "";
+			}
+		?>
 		<tr>
 			<td>Nome de Usu&aacute;rio:</td>
-			<td><?= form_input('username', ($obj_usuario ? $obj_usuario->username : $username), 'class="normal_input" id="input_username"') ?></td>
+			<td><?= form_input('username', ($obj_usuario ? $obj_usuario->username : $username), 'class="normal_input" id="input_username"' . $str_disabled) ?></td>
 		</tr>
 		<tr>
 			<td>Nome:</td>
