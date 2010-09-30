@@ -28,8 +28,10 @@
 				<td align="center"><img src="<?= base_url() ?>img/<?= ($usuario->pode_administrar ? 'yes.gif' : 'no.gif' ) ?>" /></td>
 				<td align="center"><img src="<?= base_url() ?>img/<?= ($usuario->ativo ? 'yes.gif' : 'no.gif' ) ?>" /></td>
 				<td align="center" valign="bottom">
-					<?= anchor('usuarios/editar/' . $usuario->id, '<img src="' . base_url() . 'img/edit.gif" border="0" title="Editar"/>') ?>
-					&nbsp;<?= anchor('usuarios/excluir/' . $usuario->id, '<img src="' . base_url() . 'img/remove.gif" border="0" title="Excluir"/>', 'onclick="javascript:if (confirm(\'Você realmente deseja excluir o usuário ' . $usuario->nome . '?\')) { return true; } else { return false; }"') ?>
+					<? if (Usuario::atual()->id != $usuario->id) { ?>
+						<?= anchor('usuarios/editar/' . $usuario->id, '<img src="' . base_url() . 'img/edit.gif" border="0" title="Editar"/>') ?>
+						&nbsp;<?= anchor('usuarios/excluir/' . $usuario->id, '<img src="' . base_url() . 'img/remove.gif" border="0" title="Excluir"/>', 'onclick="javascript:if (confirm(\'Você realmente deseja excluir o usuário ' . $usuario->nome . '?\')) { return true; } else { return false; }"') ?>
+					<? } ?>
 				</td>
 			</tr>
 			<? $i = 1-$i; ?>

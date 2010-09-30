@@ -78,7 +78,8 @@
 		// Exclui uma Permissão / Usuário
 		public function excluir()
 		{
-			if ($this->uri->segment(3) != '') {
+			$data = array();
+			if ($this->uri->segment(3) != '' && Usuario::atual()->id != $this->uri->segment(3)) {
 				$obj_usuario = Doctrine::getTable('Usuario')->find($this->uri->segment(3));
 				$data['aviso'] = 'Usuário ' . $obj_usuario->username . ' removido da agenda ' . Agenda::atual()->nome;
 				$nperms = count($obj_usuario->Permissoes);
