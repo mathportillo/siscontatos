@@ -24,5 +24,3 @@
 	<?= anchor('propriedades', 'Propriedades') ?>
 
 <? } ?>
-	
-<?= anchor('configuracoes','Configura&ccedil;&otilde;es') ?>

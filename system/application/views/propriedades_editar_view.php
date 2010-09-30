@@ -9,7 +9,7 @@
 <table class="simplefont">
 	<tr>
 		<td>Nome:</td>
-		<td><?= form_input('nome', ($obj_propriedade ? $obj_propriedade->nome : '')) ?></td>
+		<td><?= form_input('nome', ($obj_propriedade ? $obj_propriedade->nome : ''), 'class="normal_input"') ?></td>
 	</tr>
 	<tr>
 		<td>Tipo:</td>
@@ -23,7 +23,7 @@
 	</tr>
 	<tr>
 		<td>Tamanho:</td>
-		<td><?= form_input('tamanho', ($obj_propriedade ? $obj_propriedade->nome : '')) ?></td>
+		<td><?= form_input('tamanho', ($obj_propriedade ? $obj_propriedade->nome : ''), 'class="normal_input"') ?></td>
 	</tr>
 </table><br />
 <div>

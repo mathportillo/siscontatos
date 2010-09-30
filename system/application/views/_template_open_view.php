@@ -40,9 +40,13 @@
 					
 				</div>
 				<div id="div_info">
-					Usuario: <?= Usuario::atual()->username ?>
-					(<?= Usuario::atual()->nome ?>)
-					<?= anchor('login/sair', 'Sair', 'class="itembutton"') ?>
+					<div style="float: right">
+						<?= anchor('login/sair', 'Sair', 'class="itembutton"') ?>
+						<?= anchor('configuracoes','Configura&ccedil;&otilde;es', 'class="itembutton"') ?>
+					</div>
+					<div style="float: right; margin: auto; line-height: 22px;">
+						Usu&aacute;rio: <?= Usuario::atual()->username ?> (<?= Usuario::atual()->nome ?>)&nbsp;
+					</div>
 				</div>
 			</div>
 			<div id="div_menu">

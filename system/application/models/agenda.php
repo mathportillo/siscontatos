@@ -26,6 +26,16 @@ class Agenda extends Doctrine_Record
 		}
 	}
 	
+	public function getPropriedades()
+	{
+		$obj_propriedades = Doctrine_Query::create()
+							->from('Agenda a')
+							->innerJoin('a.Propriedades p ON p.agenda_id = ' . $this->id)
+							->execute();
+		
+		return $obj_propriedades;
+	}
+	
 	public function setTableDefinition()
 	{
 		$this->hasColumn('nome', 'string', 255);
@@ -42,6 +52,12 @@ class Agenda extends Doctrine_Record
 			'local' => 'id',
 			'foreign' => 'agenda_id'
 		));
+		
+		$this->hasMany('Propriedade as Propriedades', array(
+			'local' => 'id',
+			'foreign' => 'agenda_id'
+		));
+		
 	}
 }
 

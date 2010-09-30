@@ -30,7 +30,7 @@
 			$novo_agenda = new Agenda();
 			$novo_agenda->nome = "Principal";	
 			$novo_agenda->save();
-			
+						
 			$obj_configuracao = new Configuracao();
 			$obj_configuracao->usuario_id = $novo_usuario->id;
 			$obj_configuracao->nome = 'agendainicial';

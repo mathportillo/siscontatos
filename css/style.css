@@ -176,6 +176,7 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 
 #div_logo {
 	float: left;
+	margin: 5px 0px 0px 20px;
 }
 
 #div_info {
@@ -209,7 +210,7 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 	height: 22px;
 	margin: 0px 0px 0px 7px;
 	display: inline-table;
-	width: 200px;
+	width: 165px;
 	background: #004600;
 	color: white;
 	text-align: center;
@@ -512,7 +513,6 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 }
 
 #div_footer {
-	height: 140px;
 	text-align: center;
 	border-top: solid 1px #004600;
 }

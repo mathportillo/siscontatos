@@ -1,9 +1,16 @@
 <?
 	class Propriedades extends Controller
 	{
-		function index()
+		public function index()
 		{
-			$this->load->view('propriedades_view');
+			$this->_lista_propriedades();
+		}
+		
+		public function _lista_propriedades($data = array())
+		{
+			$data['propriedades'] = Agenda::atual()->getPropriedades();
+			
+			$this->load->view('propriedades_view',$data);
 		}
 		
 		public function novo()
