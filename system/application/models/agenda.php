@@ -53,6 +53,11 @@ class Agenda extends Doctrine_Record
 			'foreign' => 'agenda_id'
 		));
 		
+			$this->hasMany('Log as Logs',array(
+			'local'=>'id',
+			'foreign'=>'usuario_id'
+		));
+		
 		$this->hasMany('Propriedade as Propriedades', array(
 			'local' => 'id',
 			'foreign' => 'agenda_id'

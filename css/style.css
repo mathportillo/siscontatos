@@ -247,6 +247,7 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 	border-radius: 10px;	 
 }
 
+
 #div_contatos {
 	width: 870px;
 	margin: auto;
@@ -462,7 +463,7 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 
 .ficha .linha {
 	clear: both;
-	height: 15px;
+	height: 2px;
 	line-height: 14px;
 	vertical-align: middle;
 }
@@ -502,7 +503,7 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 	margin: 0px 5px;
 }
 
-#div_importar {
+#div_importar    {
 	float: left;
 	height: 22;
 }
@@ -515,4 +516,8 @@ a:hover { color: #007600; text-decoration: none; font-weight: bold; }
 #div_footer {
 	text-align: center;
 	border-top: solid 1px #004600;
+}
+
+.fontegrande {
+	font-size: 11pt;
 }

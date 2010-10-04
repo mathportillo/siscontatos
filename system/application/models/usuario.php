@@ -86,7 +86,9 @@ class Usuario extends Doctrine_Record
 		$this->hasColumn('hue', 'integer');
 		$this->hasColumn('ec', 'integer', 4);
 	}
-
+	
+	
+	
 	public function setUp()
 	{
 		$this->unique(array('username'));
@@ -94,6 +96,11 @@ class Usuario extends Doctrine_Record
 		$this->hasMany('Permissao as Permissoes', array(
 			'local' => 'id',
 			'foreign' => 'usuario_id'
+		));
+		
+		$this->hasMany('Log as Logs',array(
+			'local'=>'id',
+			'foreign'=>'usuario_id'
 		));
 		
 		$this->hasMany('Configuracao as Configuracoes', array(

@@ -14,7 +14,7 @@
 		<? $lin++; ?>
 		<div class="ficha<?= ($lin < $linmax ? ' marginbaixo' : '') ?>"><div class="ficha_margin">
 			<div class="linhazona">
-				<div class="ficha_esquerda">
+				<div class="ficha_esquerda fontegrande">
 					<?= htmlentities($contato->nome,ENT_QUOTES,'UTF-8') ?>
 				</div><div class="ficha_acoes">
 					<? if (Usuario::atual()->Permissoes[0]->pode_editar) { ?>
