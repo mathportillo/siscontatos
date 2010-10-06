@@ -31,6 +31,7 @@ class Usuario extends Doctrine_Record
 			self::$_usuario_atual = null;
 			return self::$_usuario_atual;
 		}
+		
 	}
 	
 	public function getAgendas()

@@ -36,7 +36,7 @@
 			
 			$this->load->view('usuarios_view',$data);
 		}
-
+		
 		// Chama a View de Criação de novo usuário
 		public function novo($username = '', $pode_visualizar = true, $pode_editar = false, $pode_gerenciar = false)
 		{
